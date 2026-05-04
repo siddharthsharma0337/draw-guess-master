@@ -22,10 +22,3 @@ export function disconnectSocket() {
     socket = null;
   }
 }
-
-export function disconnectSocket() {
-  if (socket) {
-    socket.disconnect();
-    socket = null;
-  }
-}
