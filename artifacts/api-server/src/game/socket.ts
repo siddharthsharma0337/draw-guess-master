@@ -52,8 +52,9 @@ function calculateGuessScore(position: number): number {
 }
 
 export function setupSocket(server: HttpServer): SocketIOServer {
+  const corsOrigin = process.env.CORS_ORIGIN ?? "*";
   const io = new SocketIOServer(server, {
-    cors: { origin: "*" },
+    cors: { origin: corsOrigin, credentials: true },
     path: "/socket.io",
   });
 

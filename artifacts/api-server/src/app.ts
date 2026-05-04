@@ -25,7 +25,10 @@ app.use(
     },
   }),
 );
-app.use(cors());
+// Allow frontend origin (set CORS_ORIGIN=https://your-app.vercel.app in production)
+const corsOrigin = process.env.CORS_ORIGIN ?? "*";
+app.use(cors({ origin: corsOrigin, credentials: true }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
