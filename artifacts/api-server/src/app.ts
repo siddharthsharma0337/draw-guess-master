@@ -25,7 +25,6 @@ app.use(
 
 if (isProduction) {
   // Serve built React frontend as static files (same-origin → no CORS needed)
-  // build.mjs copies skribbl/dist/public → api-server/dist/public
   const staticDir = path.resolve(import.meta.dirname, "public");
   if (existsSync(staticDir)) {
     app.use(express.static(staticDir));
@@ -45,9 +44,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api", router);
 
 // SPA fallback: all non-API routes return index.html (for client-side routing)
+// Use regex instead of "*" — Express 5 (router@2) does not accept bare "*" wildcard
 if (isProduction) {
   const staticDir = path.resolve(import.meta.dirname, "public");
-  app.get("*", (_req, res) => {
+  app.get(/.*/, (_req, res) => {
     const indexHtml = path.join(staticDir, "index.html");
     if (existsSync(indexHtml)) {
       res.sendFile(indexHtml);
