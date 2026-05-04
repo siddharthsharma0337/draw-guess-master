@@ -13,7 +13,7 @@ export function ChatBox() {
   return (
     <div
       ref={scrollRef}
-      className="flex-1 overflow-y-auto bg-white rounded-2xl shadow-md p-3 space-y-1.5 min-h-0"
+      className="flex-1 overflow-y-auto bg-white rounded-2xl shadow-md p-3 space-y-1.5 min-h-0 scrollbar-thin"
     >
       {chat.length === 0 && (
         <p className="text-slate-400 text-sm text-center py-4">
